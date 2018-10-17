@@ -1,2 +1,0 @@
-https://www.analog.com/media/en/technical-documentation/data-sheets/ad624.pdf - AD624 datasheet
-http://www.ti.com/lit/ds/snosc16d/snosc16d.pdf - LM324 Datasheet
