@@ -1,0 +1,42 @@
+Python is a language I was highly unfamiliar with, and therefore took far longer to get up and running than anticipated (even accounting for unexpected delays).
+Both Pyserial and MatPlotLib were necessary in order to produce this real time graph. 
+The code still currently has issues, and crashes frequently occur. Whether this is caused by the Python code, the CCS code, or a mixture of both is still being looked into.
+Also, the real time graph is still slower than what would be preferable. Luckily it is fast enough to get the rough outline of an incoming EKG graph, but it is unlikely anything more than a QRS complex and possibly a T wave will be seen.
+The print function is for ease of use, allowing whoever is running the code to better see where the code gets hung up if an error occurs while having no impact on the graph itself. 
+
+import serial
+import matplotlib.pyplot as plt
+from drawnow import drawnow
+
+print("{0}".format(1))
+print("{0}".format(2))
+fig = plt.figure()
+Rdata = []
+port = 'COM5'
+baud = 115200
+print("{0}".format(3))
+ser = serial.Serial(port= port, baudrate = baud)
+print("{0}".format(4))
+plt.ion()
+cnt = 0
+frame_size = 0
+print("{0}".format(5))
+def makeFig():
+    print("{0}".format(6))
+    plt.ylim(-10, 80)
+    plt.xlim(frame_size - 10, frame_size)
+    plt.title('Live Data')
+    plt.grid(False)
+    plt.ylabel('VALUES')
+    plt.plot(Rdata, 'b')
+makeFig()
+while True:
+    print(ser.is_open)
+    print("{0}".format(7))
+    input_data = ser.read()
+    print("{0}".format(8))
+    Rdata.append(input_data)
+    drawnow(makeFig)
+    input_data = 0
+    frame_size = frame_size+1
+
