@@ -1,0 +1,41 @@
+Below is the code used to set up the MSP to use its ADC in order to interpret the signals coming in from the EKG circuit and transform them into signals the Python graphing code can understand.
+This code has seen many renditions (the intermediate steps were due to lack of knowledge in coding and are not worth including here, however the highlights of errors made will be discussed).
+Firstly, the code was initially made to be run in ultra low power mode. While the MSP claims to have this capability, actual testing left much to be desired performance wise, so the clock was increased to the 16 Mhz speed currently used.
+The values to set the baud rate and ADC properties can be found in the MSP430's family guide, and are integral for any trying to perform a similair project or function.
+Originally, interrupts were used, but in the end were removed in order to prevent the MSP from leaving active mode for any reason in hopes of making the ADC conversions and subsequent tranmissions as fast as possible with little room for error.
+
+
+#include <msp430.h> 
+
+unsigned int num = 0;
+
+void main(void)
+{
+	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+	BCSCTL1 = CALBC1_16MHZ;          // 16 MHz
+	BCSCTL2 = SELM_0 + DIVM_0 + DIVS_0;
+	DCOCTL = CALDCO_16MHZ;
+	P2DIR |= 0xFF; // All P2.x outputs
+	P2OUT &= 0x00; // All P2.x reset
+	P1SEL |= BIT1 + BIT2 + BIT3;    // ADC pin P1.3, p1.1 rx, p1.2 tx
+	P1SEL2 |= BIT1 + BIT2;
+	P1DIR |= BIT6 + BIT0;
+	P1OUT &= 0x00;
+	UCA0CTL1 |= UCSSEL_2;                                   //Submainclock
+	UCA0BR0 = 138;                                          // 16 MHz 115200
+	UCA0BR1 = 0;                                           // 16 MHz 115200
+	UCA0MCTL |= (UCBRS2 + UCBRS1 + UCBRS0);                // Modulation UCBRSx = 7
+	UCA0CTL1 &= ~UCSWRST;                                  //Initialize USCI state machine
+	ADC10CTL1 = INCH_3 + ADC10DIV_0 + ADC10SSEL_2;         // Channel 3, ADC10CLK/1, MCLK
+	ADC10CTL0 = SREF_0 + ADC10ON;                           // Vcc & Vss as reference, ADC on
+	ADC10AE0 |= BIT3;                                     // ADC input enable P1.3
+	
+	 while (1)
+	        {
+	            ADC10CTL0 |= ENC + ADC10SC;     // Sampling and conversion start
+	            num = ADC10MEM;
+	            while(!(IFG2 & UCA0TXIFG));    // Checks if USCI_A0 TX buffer ready
+	            UCA0TXBUF = num;
+	        }
+
+}
