@@ -1,0 +1,7 @@
+Unfortuntely due to time contraints and many, many errors in getting the EKG portion of the project working, the Pulse Oximetry portion of the project was not worked on.
+
+The information in this folder is still relevant and correct for any seeking to do this part themselves.
+
+Pulse oximetry, in short, is found by comparing a ratio of infrared light to red light that penetrates through a vein (commonly in a finger) that is picked up on a phototransistor. 
+
+The amplification (though much, much less is needed) and filtering done in the EKG portion of the project can be used again here, for the same reasons they are used in that application.
