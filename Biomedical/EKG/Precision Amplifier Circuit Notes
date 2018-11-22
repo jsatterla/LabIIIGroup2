@@ -1,0 +1,7 @@
+A low noise, high precision amplifier is needed to increase the small signals to a readable level without introducing too much noise into the system.
+
+The AD624 amplifier was used (datasheet in references) which causes the peak wave of the EKG (QRS Complex) to be amplified to approximately a 1 volt spike.
+
+The filtering worked well, with the higher frequency noise being removed efficiently and the low signal being left untouched to be read by the MSP430's ADC.
+
+With only two leads being used in this circuit, it is not difficult to catch the QRS complex, and the T wave can be found with some difficulty. It is unlikely to be able to catch the P wave or the downward deflection of the graph without adding more leads, though for the purposes of prototyping and demonstration of this project more leads will not be added.
