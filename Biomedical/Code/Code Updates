@@ -1,0 +1,5 @@
+Real time graphing of code in Code Composer Studio was not reasonable, due to the graph updating far too slowly (100 ms or more, when around 2 ms is ideal).
+
+To remedy this issue, the code for controlling the microcontroller was written in code composer studio (which can be found in the text file NewCCSCode) while the code to actually graph the signal was written in Python (found in Python code).
+
+Comments specifically related to each of the codes will be located within the code files named above.
