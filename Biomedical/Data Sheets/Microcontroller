@@ -1,0 +1,5 @@
+http://www.ti.com/lit/ug/slau144j/slau144j.pdf - msp430g2553 user's guide
+
+Ultimately, the g2553 may not have been the best choice for this project. Theoretically, the adc is more than capable of operating at the necessary speed.
+While I still believe this is true, and the slower readings from the EKG machine are not the msp's fault, I cannot rule that out as a possibility.
+If the project was to be attempted again, a faster "overkill" type microcontroller would be used just to isolate the error to being completely on the software side.
