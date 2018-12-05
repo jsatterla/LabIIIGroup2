@@ -1,1 +1,1 @@
-This folder contains Zigbee modules to communicate wirelessly. 
+Folder for 2 MSP430 programs that control the model home's devices.
