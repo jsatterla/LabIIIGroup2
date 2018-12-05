@@ -1,0 +1,1 @@
+Python 3.7 program communicating with TI CC2640R2F LaunchPad for location tracking with Time of Flight. Sends network commands to XBee interfaced via RS232 breakout board. Uses pyserial for serial communication to XBee and CC2640R2F LaunchPad, and TkInter package for GUI.
