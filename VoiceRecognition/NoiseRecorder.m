@@ -20,8 +20,9 @@ function [NoiseData]=NoiseRecorder(fs1,nBits,nChannels,RecordingTime,TopFolder,F
     AudioRecording = getaudiodata(recObj);                                  % gets the audio data from the recording
     writewav(AudioRecording,8000,audioNoiseString,'16',[],[]);              % creates a noise.wav file from the recording
   
-    NoiseData=AudioRecording;
-
+%     NoiseData=AudioRecording;
+    cd(FF)
+    [NoiseData] = VectorSimp(AudioRecording);
     cd(TopFolder)
         
     

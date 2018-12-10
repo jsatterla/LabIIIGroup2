@@ -1,17 +1,17 @@
-function [CleanSig] = RemoveNoise(PhraseData,TopFolder,NoiseData,fs1)
+function [CleanSig] = RemoveNoise(PhraseData,NoiseData,fs1)
 
 %     cd('/Volumes/Macintosh HD/Documents/TTU/Year 4/Fall semester/Project Lab III/Main project/Matlab')%selects the main Directory
 %     
 %     cd ('noise')
 %     
 %     [NoiseData]=readwav('noise.wav','p');
-    cd(TopFolder)
+%     cd(TopFolder)
 
     
     noisySig = PhraseData;
     noise = NoiseData;
         % Define Adaptive Filter Parameters
-    filterLength = 32;
+    filterLength = 16;
     weights   = zeros(1,filterLength);
     step_size = 1/fs1;
         % Initialize Filter's Operational inputs
@@ -33,7 +33,16 @@ function [CleanSig] = RemoveNoise(PhraseData,TopFolder,NoiseData,fs1)
     
     CleanSig = error;
     
-    cd(TopFolder)
+%     cd(TopFolder)
+    
+    
+    
+    
+    
     
     
 end
+
+
+
+

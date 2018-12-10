@@ -19,4 +19,5 @@ function[Phrase1,Phrase2,Phrase3,PhraseFolder] = UserPhrases(TopFolder)
     mkdir(Phrase3)                  % creates folder for third Phrase
 
     cd(TopFolder)
+    
 end

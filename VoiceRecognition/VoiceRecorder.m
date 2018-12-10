@@ -1,4 +1,4 @@
-function [Phrase1,Phrase2,Phrase3,PhraseFolder] = VoiceRecorder(fs1,nBits,nChannels,RecordingTime,TopFolder,FF)
+function [PhraseFolder] = VoiceRecorder(fs1,nBits,nChannels,RecordingTime,TopFolder,FF)
 
     recObj = audiorecorder(fs1,nBits,nChannels);       % initiates audio recording 
     
@@ -39,9 +39,12 @@ function [Phrase1,Phrase2,Phrase3,PhraseFolder] = VoiceRecorder(fs1,nBits,nChann
 
         doneRec = [temp_Phrase,' has finished with recording'];         % when a phrase has been recorded enough times
         disp(doneRec);              
-        cd(PhraseFolder)                                                % move back into the Phrases folder
-
+        cd(PhraseFolder)                                                % move back into the Phrases folder  
     end    
+    
+    PsA = ['0';Phrase1;Phrase2;Phrase3];
+    dlmwrite('PhraseStrings.txt',PsA)
+    
     cd (TopFolder)
 end
  

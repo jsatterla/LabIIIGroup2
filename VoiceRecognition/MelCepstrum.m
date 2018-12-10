@@ -1,4 +1,7 @@
-function 
-
-
-c=melcepst(signal,FS);
+function [c] = MelCepstrum(signal)
+    
+    %c=melcepst(signal,FS);
+    [c] = cceps(signal);
+    
+    
+end
